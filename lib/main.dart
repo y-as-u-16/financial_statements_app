@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       title: '決算書グラフ化アプリ',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('決算書グラフ化アプリ'),
+          title: const Text('決算書グラフ化'),
         ),
         body: StackedBarChart(),
       ),
