@@ -1,3 +1,4 @@
+import 'package:financial_statements_app/widgets/dismiss_keyboard_widget.dart';
 import 'package:flutter/material.dart';
 import '../widgets/stacked_bar_chart.dart';
 
@@ -15,7 +16,9 @@ class StackedBarChartScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('決算書グラフ化'),
       ),
-      body: const StackedBarChart(),
+      body: const DismissKeyboardWidget(
+        child: StackedBarChart(),
+      ),
     );
   }
 }

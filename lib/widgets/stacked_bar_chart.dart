@@ -12,10 +12,13 @@ class StackedBarChart extends StatefulWidget {
 }
 
 class _StackedBarChartState extends State<StackedBarChart> {
-  final TextEditingController _currentAssetsController = TextEditingController();
+  final TextEditingController _currentAssetsController =
+      TextEditingController();
   final TextEditingController _fixedAssetsController = TextEditingController();
-  final TextEditingController _currentLiabilitiesController = TextEditingController();
-  final TextEditingController _longTermLiabilitiesController = TextEditingController();
+  final TextEditingController _currentLiabilitiesController =
+      TextEditingController();
+  final TextEditingController _longTermLiabilitiesController =
+      TextEditingController();
   final TextEditingController _netWorthController = TextEditingController();
 
   /// ウィジェットツリーを構築する
@@ -28,24 +31,34 @@ class _StackedBarChartState extends State<StackedBarChart> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
               _buildTextField(_currentAssetsController, '流動資産'),
+              const SizedBox(height: 8.0),
               _buildTextField(_fixedAssetsController, '固定資産'),
+              const SizedBox(height: 8.0),
               _buildTextField(_currentLiabilitiesController, '流動負債'),
+              const SizedBox(height: 8.0),
               _buildTextField(_longTermLiabilitiesController, '固定負債'),
+              const SizedBox(height: 8.0),
               _buildTextField(_netWorthController, '純資産'),
               ElevatedButton(
                 onPressed: _updateChart,
-                child: const Text('グラフ化する'),
+                child: const Text(
+                  'グラフ化する',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 16,
+                  ),
+                ),
               ),
             ],
           ),
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: BarChart(
               BarChartData(
                 alignment: BarChartAlignment.spaceAround,
@@ -57,11 +70,26 @@ class _StackedBarChartState extends State<StackedBarChart> {
                       getTitlesWidget: (double value, TitleMeta meta) {
                         switch (value.toInt()) {
                           case 0:
-                            return const Text('資産');
+                            return const Text(
+                              '資産',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            );
                           case 1:
-                            return const Text('負債・純資産');
+                            return const Text(
+                              '負債・純資産',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            );
                           default:
-                            return const Text('');
+                            return const Text(
+                              '',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            );
                         }
                       },
                     ),
@@ -98,12 +126,15 @@ class _StackedBarChartState extends State<StackedBarChart> {
   List<BarChartGroupData> _createSampleData() {
     double currentAssets = double.tryParse(_currentAssetsController.text) ?? 0;
     double fixedAssets = double.tryParse(_fixedAssetsController.text) ?? 0;
-    double currentLiabilities = double.tryParse(_currentLiabilitiesController.text) ?? 0;
-    double longTermLiabilities = double.tryParse(_longTermLiabilitiesController.text) ?? 0;
+    double currentLiabilities =
+        double.tryParse(_currentLiabilitiesController.text) ?? 0;
+    double longTermLiabilities =
+        double.tryParse(_longTermLiabilitiesController.text) ?? 0;
     double netWorth = double.tryParse(_netWorthController.text) ?? 0;
 
     double totalAssets = currentAssets + fixedAssets;
-    double totalLiabilitiesAndNetWorth = currentLiabilities + longTermLiabilities + netWorth;
+    double totalLiabilitiesAndNetWorth =
+        currentLiabilities + longTermLiabilities + netWorth;
 
     if (totalAssets < 1) totalAssets = 1;
     if (totalLiabilitiesAndNetWorth < 1) totalLiabilitiesAndNetWorth = 1;
@@ -129,7 +160,9 @@ class _StackedBarChartState extends State<StackedBarChart> {
         x: 1,
         barRods: [
           BarChartRodData(
-            toY: (currentLiabilities + longTermLiabilities + netWorth) / totalLiabilitiesAndNetWorth * 100,
+            toY: (currentLiabilities + longTermLiabilities + netWorth) /
+                totalLiabilitiesAndNetWorth *
+                100,
             color: Colors.orange,
             width: 100,
             borderRadius: BorderRadius.zero,
@@ -141,11 +174,15 @@ class _StackedBarChartState extends State<StackedBarChart> {
               ),
               BarChartRodStackItem(
                 currentLiabilities / totalLiabilitiesAndNetWorth * 100,
-                (currentLiabilities + longTermLiabilities) / totalLiabilitiesAndNetWorth * 100,
+                (currentLiabilities + longTermLiabilities) /
+                    totalLiabilitiesAndNetWorth *
+                    100,
                 Colors.orange,
               ),
               BarChartRodStackItem(
-                (currentLiabilities + longTermLiabilities) / totalLiabilitiesAndNetWorth * 100,
+                (currentLiabilities + longTermLiabilities) /
+                    totalLiabilitiesAndNetWorth *
+                    100,
                 100,
                 Colors.green,
               ),
@@ -165,7 +202,11 @@ class _StackedBarChartState extends State<StackedBarChart> {
   Widget _buildTextField(TextEditingController controller, String label) {
     return TextField(
       controller: controller,
-      decoration: InputDecoration(labelText: label),
+      decoration: InputDecoration(
+          labelText: label,
+          labelStyle: const TextStyle(
+            color: Colors.black,
+          )),
       keyboardType: TextInputType.number,
     );
   }
