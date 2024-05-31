@@ -28,88 +28,92 @@ class _StackedBarChartState extends State<StackedBarChart> {
   /// 戻り値: Column ウィジェットを返す
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              _buildTextField(_currentAssetsController, '流動資産'),
-              const SizedBox(height: 8.0),
-              _buildTextField(_fixedAssetsController, '固定資産'),
-              const SizedBox(height: 8.0),
-              _buildTextField(_currentLiabilitiesController, '流動負債'),
-              const SizedBox(height: 8.0),
-              _buildTextField(_longTermLiabilitiesController, '固定負債'),
-              const SizedBox(height: 8.0),
-              _buildTextField(_netWorthController, '純資産'),
-              ElevatedButton(
-                onPressed: _updateChart,
-                child: const Text(
-                  'グラフ化する',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Padding(
+    return Container(
+      height: 1500,
+      child: Column(
+        children: [
+          Padding(
             padding: const EdgeInsets.all(16.0),
-            child: BarChart(
-              BarChartData(
-                alignment: BarChartAlignment.spaceAround,
-                barGroups: _createSampleData(),
-                titlesData: FlTitlesData(
-                  bottomTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      getTitlesWidget: (double value, TitleMeta meta) {
-                        switch (value.toInt()) {
-                          case 0:
-                            return const Text(
-                              '資産',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            );
-                          case 1:
-                            return const Text(
-                              '負債・純資産',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            );
-                          default:
-                            return const Text(
-                              '',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            );
-                        }
-                      },
+            child: Column(
+              children: [
+                _buildTextField(_currentAssetsController, '流動資産'),
+                const SizedBox(height: 8.0),
+                _buildTextField(_fixedAssetsController, '固定資産'),
+                const SizedBox(height: 8.0),
+                _buildTextField(_currentLiabilitiesController, '流動負債'),
+                const SizedBox(height: 8.0),
+                _buildTextField(_longTermLiabilitiesController, '固定負債'),
+                const SizedBox(height: 8.0),
+                _buildTextField(_netWorthController, '純資産'),
+                ElevatedButton(
+                  onPressed: _updateChart,
+                  child: const Text(
+                    'グラフ化する',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 16,
                     ),
                   ),
-                  leftTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
                 ),
-                borderData: FlBorderData(show: false),
-                gridData: const FlGridData(show: false),
-                barTouchData: BarTouchData(
-                  touchTooltipData: BarTouchTooltipData(),
-                  touchCallback: (FlTouchEvent event, barTouchResponse) {},
-                  handleBuiltInTouches: true,
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 800,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: BarChart(
+                BarChartData(
+                  alignment: BarChartAlignment.spaceAround,
+                  barGroups: _createSampleData(),
+                  titlesData: FlTitlesData(
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        getTitlesWidget: (double value, TitleMeta meta) {
+                          switch (value.toInt()) {
+                            case 0:
+                              return const Text(
+                                '資産',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              );
+                            case 1:
+                              return const Text(
+                                '負債・純資産',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              );
+                            default:
+                              return const Text(
+                                '',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              );
+                          }
+                        },
+                      ),
+                    ),
+                    leftTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                  ),
+                  borderData: FlBorderData(show: false),
+                  gridData: const FlGridData(show: false),
+                  barTouchData: BarTouchData(
+                    touchTooltipData: BarTouchTooltipData(),
+                    touchCallback: (FlTouchEvent event, barTouchResponse) {},
+                    handleBuiltInTouches: true,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

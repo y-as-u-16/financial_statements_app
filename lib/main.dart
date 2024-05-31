@@ -20,17 +20,25 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: const TextTheme(
-          bodyMedium: TextStyle(color: Colors.blue),
+          bodyMedium: TextStyle(
+            color: Colors.blue,
+          ),
         ),
         inputDecorationTheme: const InputDecorationTheme(
           border: OutlineInputBorder(),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue),
+            borderSide: BorderSide(
+              color: Colors.blue,
+            ),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue),
+            borderSide: BorderSide(
+              color: Colors.blue,
+            ),
           ),
-          labelStyle: TextStyle(color: Colors.blue),
+          labelStyle: TextStyle(
+            color: Colors.blue,
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

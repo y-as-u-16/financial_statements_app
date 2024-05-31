@@ -16,8 +16,10 @@ class StackedBarChartScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('決算書グラフ化'),
       ),
-      body: const DismissKeyboardWidget(
-        child: StackedBarChart(),
+      body: const SingleChildScrollView(
+        child: DismissKeyboardWidget(
+          child: StackedBarChart(),
+        ),
       ),
     );
   }
